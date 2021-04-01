@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        iqta_branch:
+          - pip-install-binary-only
+          - remove-VSCMD_ARG_TGT_ARCH
+          - use-python-3_6-or-3_7        
+    runs-on: windows-latest
+
+    steps:
+      - env:
+          VSCMD_ARG_TGT_ARCH: 'x86'
+        uses: pzhlkj6612/install-qt-action@${{ matrix.iqta_branch }}
+        with:
+          version: 5.14.2
+          arch: win32_msvc2017
