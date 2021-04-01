@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/install-qt-action@use-python-3_6-or-3_7.yml
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/install-qt-action@use-python-3_6-or-3_7.yml
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - env:
+          VSCMD_ARG_TGT_ARCH: 'x86'
+        uses: install-qt-action@use-python-3_6-or-3_7
+        with:
+          version: 5.14.2
+          arch: win32_msvc2017
