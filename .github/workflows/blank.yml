@@ -13,16 +13,33 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        iqta_source:
-          - pzhlkj6612/install-qt-action@pip-install-binary-only
-          - pzhlkj6612/install-qt-action@remove-VSCMD_ARG_TGT_ARCH
-          - pzhlkj6612/install-qt-action@use-python-3_6-or-3_7        
+        iqta_branch:
+          - pip-install-binary-only
+          - remove-VSCMD_ARG_TGT_ARCH
+          - use-python-3_6-or-3_7        
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: 'pzhlkj6612/install-qt-action'
+          ref: '${{ matrix.iqta_branch }}'
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: "npm ci"
+        run: npm ci
+
+      - name: "npm run build"
+        run: |
+          npm run build-setup-python
+          npm run build
+
       - env:
           VSCMD_ARG_TGT_ARCH: 'x86'
-        uses: ${{ matrix.iqta_source }}
+        uses: ./
         with:
           version: 5.14.2
           arch: win32_msvc2017
