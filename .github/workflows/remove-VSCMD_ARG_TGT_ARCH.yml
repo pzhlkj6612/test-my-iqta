@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/remove-VSCMD_ARG_TGT_ARCH.yml
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/remove-VSCMD_ARG_TGT_ARCH.yml
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - env:
+          VSCMD_ARG_TGT_ARCH: 'x86'
+        uses: pzhlkj6612/install-qt-action@remove-VSCMD_ARG_TGT_ARCH
+        with:
+          version: 5.14.2
+          arch: win32_msvc2017
