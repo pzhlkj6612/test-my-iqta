@@ -13,16 +13,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        iqta_branch:
-          - pip-install-binary-only
-          - remove-VSCMD_ARG_TGT_ARCH
-          - use-python-3_6-or-3_7        
+        iqta_source:
+          - pzhlkj6612/install-qt-action@pip-install-binary-only
+          - pzhlkj6612/install-qt-action@remove-VSCMD_ARG_TGT_ARCH
+          - pzhlkj6612/install-qt-action@use-python-3_6-or-3_7        
     runs-on: windows-latest
 
     steps:
       - env:
           VSCMD_ARG_TGT_ARCH: 'x86'
-        uses: pzhlkj6612/install-qt-action@${{ matrix.iqta_branch }}
+        uses: ${{ matrix.iqta_source }}
         with:
           version: 5.14.2
           arch: win32_msvc2017
