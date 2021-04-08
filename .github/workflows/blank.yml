@@ -16,7 +16,8 @@ jobs:
         iqta_branch:
           - pip-install-binary-only
           - remove-VSCMD_ARG_TGT_ARCH
-          - use-python-3_6-or-3_7        
+          - use-python-3_6-or-3_7       
+          - default-empty-py7zr-version
     runs-on: windows-latest
 
     steps:
