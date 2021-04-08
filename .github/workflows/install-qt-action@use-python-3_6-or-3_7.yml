@@ -19,7 +19,7 @@ jobs:
     steps:
       - env:
           VSCMD_ARG_TGT_ARCH: 'x86'
-        uses: install-qt-action@use-python-3_6-or-3_7
+        uses: pzhlkj6612/install-qt-action@use-python-3_6-or-3_7
         with:
           version: 5.14.2
           arch: win32_msvc2017
